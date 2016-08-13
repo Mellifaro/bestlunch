@@ -1,7 +1,9 @@
 package ua.bestlunch.repository;
 
+
 import ua.bestlunch.model.Restaurant;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +12,24 @@ import java.util.List;
  */
 public class RestaurantRepositoryImpl implements RestaurantRepository{
 
-    @Override
-    public List<Restaurant> getAll() {
-        List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.add(new Restaurant(1, "Versal", "Franka, 27", 1200));
-        restaurants.add(new Restaurant(2, "Marsel", "Shevchenka, 35", 1500));
-        restaurants.add(new Restaurant(3, "Lion",   "Soborna, 41", 1218));
-        restaurants.add(new Restaurant(4, "Velur",  "Boguna, 54", 900));
 
+    @Override
+    public List<Restaurant> getAll(){
+        List<Restaurant> restaurants = new ArrayList<>();
+        try {
+            Class.forName("org.postgresql.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/bestlunch", "postgres", "postgres");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM restaurants");
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                int popularity = rs.getInt("popularity");
+                restaurants.add(new Restaurant(id, name, address, popularity));
+            }
+            connection.close();
+        }catch (SQLException | ClassNotFoundException e){e.printStackTrace();}
         return restaurants;
     }
 }

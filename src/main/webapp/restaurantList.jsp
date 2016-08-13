@@ -8,13 +8,15 @@
 </head>
 <body>
     <h1>Restaurants</h1>
-    <table>
+    <table id="restaurants">
         <thead>
         <tr>
             <th>id</th>
             <th>name</th>
             <th>address</th>
             <th>popularity</th>
+            <th>edit</th>
+            <th>delete</th>
         </tr>
         </thead>
         <c:forEach items="${restaurants}" var="restaurant">
@@ -27,7 +29,8 @@
                 <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
             </tr>
         </c:forEach>
-
     </table>
+
+
 </body>
 </html>
