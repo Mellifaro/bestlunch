@@ -2,9 +2,10 @@ package ua.bestlunch.web;
 
 
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.bestlunch.service.RestaurantService;
-import ua.bestlunch.service.RestaurantServiceImpl;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class RestaurantServlet extends HttpServlet{
     private static final Logger LOG = getLogger(RestaurantServlet.class);
 
-    private RestaurantService service = new RestaurantServiceImpl();
+    @Autowired
+    private RestaurantService service ;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

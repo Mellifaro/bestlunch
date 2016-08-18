@@ -1,14 +1,33 @@
 package ua.bestlunch.model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+
 /**
  * Created by Виктор on 13.08.2016.
  */
-public class Restaurant {
+@NamedQueries({
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r ORDER BY r.popularity")
+})
+@Entity
+@Table(name = "restautants")
+public class Restaurant extends NamedEntity{
 
-    private int id;
-    private String name;
+    public static final String ALL_SORTED = "User.getAllSorted";
+
+    @Column(name = "address")
+    @Length(min = 5)
+    @NotEmpty()
     private String address;
+
+    @Column(name = "popularity")
+    @NotEmpty
     private int popularity;
+
+    public Restaurant(){
+    }
 
     public Restaurant(int id, String name, String address, int popularity) {
         this.id = id;
@@ -17,13 +36,6 @@ public class Restaurant {
         this.popularity = popularity;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;
@@ -31,14 +43,6 @@ public class Restaurant {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getPopularity() {
