@@ -4,15 +4,16 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Виктор on 13.08.2016.
  */
 @NamedQueries({
-        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r ORDER BY r.popularity")
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r")
 })
 @Entity
-@Table(name = "restautants")
+@Table(name = "restaurants")
 public class Restaurant extends NamedEntity{
 
     public static final String ALL_SORTED = "User.getAllSorted";
@@ -22,18 +23,16 @@ public class Restaurant extends NamedEntity{
     @NotEmpty()
     private String address;
 
-    @Column(name = "popularity")
-    @NotEmpty
-    private int popularity;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    private Set<Lunch> lunches;
 
     public Restaurant(){
     }
 
-    public Restaurant(int id, String name, String address, int popularity) {
+    public Restaurant(int id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.popularity = popularity;
     }
 
 
@@ -45,11 +44,4 @@ public class Restaurant extends NamedEntity{
         this.address = address;
     }
 
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
 }
