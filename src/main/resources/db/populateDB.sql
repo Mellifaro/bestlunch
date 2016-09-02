@@ -52,6 +52,6 @@ INSERT INTO lunch_dish (lunch_id, dish_id)
               (103, 106),
               (103, 107);
 
-INSERT INTO votes (user_id, restaurant_id)
+INSERT INTO votes (user_id, lunch_id)
       VALUES  (101, 101);
 

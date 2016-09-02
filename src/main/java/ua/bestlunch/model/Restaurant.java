@@ -23,9 +23,6 @@ public class Restaurant extends NamedEntity{
     @NotEmpty()
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
-    private Set<Lunch> lunches;
-
     public Restaurant(){
     }
 

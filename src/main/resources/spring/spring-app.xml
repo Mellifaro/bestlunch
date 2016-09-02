@@ -12,12 +12,11 @@
         </bean>
     -->
 
-    <import resource="classpath:spring/spring-db.xml" />
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="ua.**.service"/>
+    <context:component-scan base-package="ua.bestlunch.service"/>
 
-    <context:component-scan base-package="ua.**.web"/>
+
 
 </beans>

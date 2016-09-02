@@ -55,11 +55,11 @@ CREATE TABLE votes
   id              INTEGER PRIMARY KEY DEFAULT nextval('vote_seq'),
   vote_time            TIMESTAMP DEFAULT now(),
   user_id         INTEGER NOT NULL,
-  restaurant_id   INTEGER NOT NULL,
+  lunch_id        INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
+  FOREIGN KEY (lunch_id) REFERENCES lunches (id)
 );
-CREATE UNIQUE INDEX vote_date ON votes (time);
+CREATE UNIQUE INDEX vote_date ON votes (vote_time);
 
 CREATE TABLE lunch_dish(
   lunch_id INTEGER NOT NULL,

@@ -14,17 +14,17 @@ import java.util.List;
 /**
  * Created by Виктор on 16.08.2016.
  */
-@Repository
-@Transactional(readOnly = true)
-public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
-    private static final Logger LOG = LoggerFactory.getLogger(JpaRestaurantRepositoryImpl.class);
-
-    @PersistenceContext
-    private EntityManager em;
-
-    @Override
-    public List<Restaurant> getAll() {
-        LOG.debug("Entity manager - " + em.toString());
-        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
-    }
-}
+//@Repository
+//@Transactional(readOnly = true)
+//public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
+//    private static final Logger LOG = LoggerFactory.getLogger(JpaRestaurantRepositoryImpl.class);
+//
+//    @PersistenceContext
+//    private EntityManager em;
+//
+//    @Override
+//    public List<Restaurant> getAll() {
+//        LOG.debug("Entity manager - " + em.toString());
+//        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
+//    }
+//}

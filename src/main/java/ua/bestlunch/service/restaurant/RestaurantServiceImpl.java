@@ -1,4 +1,4 @@
-package ua.bestlunch.service;
+package ua.bestlunch.service.restaurant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.bestlunch.model.Restaurant;
 import ua.bestlunch.repository.RestaurantRepository;
-import ua.bestlunch.repository.RestaurantRepositoryImpl;
 
 import java.util.List;
 
@@ -22,7 +21,21 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<Restaurant> getAll() {
-        LOG.debug("Repository - " + repository.toString());
         return repository.getAll();
+    }
+
+    @Override
+    public Restaurant get(int id) {
+        return repository.get(id);
+    }
+
+    @Override
+    public Restaurant save(Restaurant restaurant) {
+        return repository.save(restaurant);
+    }
+
+    @Override
+    public void delete(int id) {
+        repository.delete(id);
     }
 }

@@ -10,4 +10,10 @@ import java.util.List;
 public interface RestaurantRepository {
 
     List<Restaurant> getAll();
+
+    Restaurant get(int id);
+
+    Restaurant save(Restaurant restaurant);
+
+    void delete(int id);
 }

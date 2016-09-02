@@ -3,9 +3,8 @@ package ua.bestlunch.web;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.bestlunch.service.RestaurantService;
+import ua.bestlunch.service.restaurant.RestaurantService;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
