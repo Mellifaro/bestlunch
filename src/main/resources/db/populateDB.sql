@@ -12,11 +12,11 @@ ALTER SEQUENCE lunch_seq RESTART WITH 100;
 ALTER SEQUENCE dish_seq RESTART WITH 100;
 ALTER SEQUENCE vote_seq RESTART WITH 100;
 
-INSERT INTO restaurants(name, address)
-    VALUES ('Versal', 'Franka, 27'),
-           ('Marsel', 'Shevchenka, 35'),
-           ('Lion',   'Soborna, 41'),
-           ('Velur',  'Boguna, 54');
+INSERT INTO restaurants(name, address, phone)
+    VALUES ('Versal', 'Franka, 27', '+380635254123'),
+           ('Marsel', 'Shevchenka, 35', NULL ),
+           ('Lion',   'Soborna, 41', '+380635254000'),
+           ('Velur',  'Boguna, 54', '+380635254101');
 
 INSERT INTO users (name, email, password)
     VALUES ('Admin', 'admin@gmail.com', 'admin'),
@@ -52,6 +52,6 @@ INSERT INTO lunch_dish (lunch_id, dish_id)
               (103, 106),
               (103, 107);
 
-INSERT INTO votes (user_id, lunch_id)
+INSERT INTO votes (user_id, restaurant_id)
       VALUES  (101, 101);
 

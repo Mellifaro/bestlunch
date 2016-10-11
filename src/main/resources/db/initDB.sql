@@ -20,7 +20,8 @@ CREATE SEQUENCE vote_seq START 100;
 CREATE TABLE restaurants (
   id      INTEGER PRIMARY KEY DEFAULT nextval('restaurant_seq'),
   name    VARCHAR NOT NULL,
-  address VARCHAR NOT NULL
+  address VARCHAR NOT NULL,
+  phone   VARCHAR DEFAULT NULL
 );
 
 CREATE TABLE users
@@ -55,9 +56,9 @@ CREATE TABLE votes
   id              INTEGER PRIMARY KEY DEFAULT nextval('vote_seq'),
   vote_time            TIMESTAMP DEFAULT now(),
   user_id         INTEGER NOT NULL,
-  lunch_id        INTEGER NOT NULL,
+  restaurant_id        INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (lunch_id) REFERENCES lunches (id)
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
 );
 CREATE UNIQUE INDEX vote_date ON votes (vote_time);
 

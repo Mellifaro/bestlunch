@@ -20,6 +20,6 @@ public class Vote extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", nullable = false)
-    private Lunch lunch;
+    private Restaurant restaurant;
 
 }

@@ -40,36 +40,44 @@ public class JdbcRestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public List<Restaurant> getAll() {
-        List<Restaurant> restaurants = jdbcTemplate.query("SELECT * FROM restaurants ORDER BY name", ROW_MAPPER);
-        return restaurants;
+    @Transactional
+    public Restaurant save(Restaurant restaurant) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", restaurant.getId())
+                .addValue("name", restaurant.getName())
+                .addValue("address", restaurant.getAddress())
+                .addValue("phone", restaurant.getPhone());
+
+        if(restaurant.isNew()){
+            Number newId = insertRestaurant.executeAndReturnKey(map);
+            restaurant.setId(newId.intValue());
+        }else {
+            if (namedParameterJdbcTemplate.update("" +
+                            "UPDATE restaurants " +
+                            "SET name=:name, address=:address, phone=:phone " +
+                            "WHERE id=:id"
+                    , map) == 0) {
+                return null;
+            }
+        }
+        return restaurant;
     }
 
     @Override
-    public Restaurant get(int id) {
+    @Transactional
+    public void delete(int id) {
+        jdbcTemplate.update("DELETE FROM restaurants WHERE id = ?", id);
+    }
+
+    @Override
+    public Restaurant find(int id) {
         List<Restaurant> restaurants = jdbcTemplate.query("SELECT * FROM restaurants WHERE id=?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(restaurants);
     }
 
     @Override
-    public Restaurant save(Restaurant restaurant) {
-        MapSqlParameterSource source = new MapSqlParameterSource()
-                                            .addValue("id", restaurant.getId())
-                                            .addValue("name", restaurant.getName())
-                                            .addValue("address", restaurant.getAddress());
-        if(restaurant.isNew()){
-            Number id = insertRestaurant.executeAndReturnKey(source);
-            restaurant.setId(id.intValue());
-        }else{
-            namedParameterJdbcTemplate.update("UPDATE restaurants SET name=:name, address=:address WHERE id=;id", source);
-        }
-        return restaurant;
+    public List<Restaurant> findAll() {
+        return jdbcTemplate.query(
+                "SELECT * FROM restaurants ORDER BY name ASC ", ROW_MAPPER);
     }
-
-
-    @Override
-    public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM restaurants WHERE id=?", id);
-    }
-
 }

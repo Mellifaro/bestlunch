@@ -1,5 +1,6 @@
 package ua.bestlunch.mock;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -14,5 +15,8 @@ public class SpringMain {
         for(String bean : beanDefinitionNames){
             System.out.println("-----" + bean);
         }
+
+        System.out.println("******************************************");
+
     }
 }

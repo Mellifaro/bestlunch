@@ -6,9 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Created by Виктор on 13.08.2016.
- */
+
 @NamedQueries({
         @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r")
 })
@@ -23,13 +21,18 @@ public class Restaurant extends NamedEntity{
     @NotEmpty()
     private String address;
 
+    @Column(name = "phone")
+    @Length(min = 6, max = 12)
+    private String phone;
+
     public Restaurant(){
     }
 
-    public Restaurant(int id, String name, String address) {
+    public Restaurant(int id, String name, String address, String phone) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.phone = phone;
     }
 
 
@@ -41,4 +44,11 @@ public class Restaurant extends NamedEntity{
         this.address = address;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

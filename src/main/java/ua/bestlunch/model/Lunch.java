@@ -1,5 +1,7 @@
 package ua.bestlunch.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ public class Lunch extends NamedEntity{
     private BigDecimal price;
 
     @Column(name = "datetime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
