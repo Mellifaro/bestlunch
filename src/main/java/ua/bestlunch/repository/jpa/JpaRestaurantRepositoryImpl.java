@@ -11,20 +11,38 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-/**
- * Created by Виктор on 16.08.2016.
- */
-//@Repository
-//@Transactional(readOnly = true)
-//public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
-//    private static final Logger LOG = LoggerFactory.getLogger(JpaRestaurantRepositoryImpl.class);
-//
-//    @PersistenceContext
-//    private EntityManager em;
-//
-//    @Override
-//    public List<Restaurant> getAll() {
-//        LOG.debug("Entity manager - " + em.toString());
-//        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
-//    }
-//}
+
+@Repository
+@Transactional(readOnly = true)
+public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    @Override
+    @Transactional
+    public Restaurant save(Restaurant restaurant) {
+        if(restaurant.isNew()){
+            em.persist(restaurant);
+            return restaurant;
+        }else{
+           return em.merge(restaurant);
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(int id) {
+        return em.createNamedQuery(Restaurant.DELETE, Restaurant.class).setParameter("id", id).executeUpdate() != 0;
+    }
+
+    @Override
+    public Restaurant find(int id) {
+        return em.find(Restaurant.class, id);
+    }
+
+    @Override
+    public List<Restaurant> findAll() {
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
+    }
+}

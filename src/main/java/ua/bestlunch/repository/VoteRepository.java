@@ -1,11 +1,12 @@
 package ua.bestlunch.repository;
 
-/**
- * Created by Виктор on 13.09.2016.
- */
+import ua.bestlunch.model.User;
+import ua.bestlunch.model.Vote;
+
+
 public interface VoteRepository {
 
-    boolean createVote(int id_user, int id_restaurant);
+    Vote addVote(Vote vote);
 
-    boolean cancelVote(int id_user);
+    boolean deleteVote(User user);
 }

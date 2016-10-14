@@ -12,11 +12,11 @@ public interface LunchRepository {
 
     Lunch save(Lunch lunch);
 
-    void delete(int id);
+    boolean delete(int id);
 
-    Lunch find(int id);
+    Lunch get(int id);
 
-    List<Lunch> findAll();
+    List<Lunch> getAll();
 
-    List<Lunch> findAllByRestaurant();
+    List<Lunch> getAllByRestaurant(int restaurantId);
 }

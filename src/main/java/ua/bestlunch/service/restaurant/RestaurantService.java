@@ -1,6 +1,7 @@
 package ua.bestlunch.service.restaurant;
 
 import ua.bestlunch.model.Restaurant;
+import ua.bestlunch.model.to.RestaurantWithLunch;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ public interface RestaurantService {
     Restaurant save(Restaurant restaurant);
 
     void delete(int id);
+
+    RestaurantWithLunch getWithLunch(int id);
+
+    List<RestaurantWithLunch> getAllWithLunches();
 }

@@ -1,21 +1,17 @@
-package ua.bestlunch.repository;
+package ua.bestlunch.service.user;
 
 import ua.bestlunch.model.User;
 
 import java.util.List;
 
 
-public interface UserRepository {
-
+public interface UserService {
     User save(User user);
 
-    // false if not found
-    boolean delete(int id);
+    void delete(int id);
 
-    // null if not found
     User get(int id);
 
-    // null if not found
     User getByEmail(String email);
 
     List<User> getAll();

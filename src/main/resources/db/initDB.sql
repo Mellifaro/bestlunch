@@ -48,7 +48,9 @@ CREATE TABLE dishes
 (
   id              INTEGER PRIMARY KEY DEFAULT nextval('dish_seq'),
   name            VARCHAR NOT NULL,
-  price           DECIMAL NOT NULL
+  price           DECIMAL NOT NULL,
+  restaurant_id   INTEGER NOT NULL ,
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
 
 CREATE TABLE votes

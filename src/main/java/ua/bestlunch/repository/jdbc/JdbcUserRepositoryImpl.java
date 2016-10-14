@@ -21,11 +21,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-/**
- * Created by Виктор on 13.09.2016.
- */
+
 @Repository
 @Transactional(readOnly = true)
 //Add set roles (methods are not finished)
@@ -93,7 +93,32 @@ public class JdbcUserRepositoryImpl implements UserRepository{
 
     @Override
     public List<User> getAll() {
-        List<User> users = jdbcTemplate.query("SELECT * FROM users ORDER BY name DESC ", ROW_MAPPER);
+        class UserRole{
+            final private Role role;
+            final private int userId;
+
+            UserRole(Role role, int userId){
+                this.role = role;
+                this.userId = userId;
+            }
+
+            public Role getRole() {
+                return role;
+            }
+
+            public int getUserId() {
+                return userId;
+            }
+        }
+
+        Map<Integer, List<Role>> userRolesMap = jdbcTemplate.query("SELECT role, user_id FROM user_roles",
+                (rs, rowNum) -> new UserRole(Role.valueOf(rs.getString("role")), rs.getInt("user_id"))).stream()
+                .collect(
+                        Collectors.groupingBy(UserRole::getUserId, Collectors.mapping(UserRole::getRole, Collectors.toList()))
+                );
+
+        List<User> users = jdbcTemplate.query("SELECT * FROM users ORDER BY name", ROW_MAPPER);
+        users.forEach(user -> user.setRoles(userRolesMap.get(user.getId())));
         return users;
     }
 

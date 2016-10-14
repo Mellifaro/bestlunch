@@ -8,12 +8,14 @@ import java.util.Set;
 
 
 @NamedQueries({
-        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r")
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT DISTINCT r FROM Restaurant r ORDER BY r.name")
 })
 @Entity
 @Table(name = "restaurants")
 public class Restaurant extends NamedEntity{
 
+    public static final String DELETE = "User.delete";
     public static final String ALL_SORTED = "User.getAllSorted";
 
     @Column(name = "address")

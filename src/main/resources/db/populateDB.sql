@@ -23,8 +23,8 @@ INSERT INTO users (name, email, password)
            ('User',  'user@gmail.com',  'user');
 
 INSERT INTO user_roles (role, user_id)
-    VALUES ('ROLE_USER', 100),
-           ('ROLE_ADMIN', 101);
+    VALUES ('USER', 100),
+           ('ADMIN', 101);
 
 INSERT INTO lunches (name, price, restaurant_id)
       VALUES ('Breakfast1', 15.25, 100),
@@ -32,15 +32,15 @@ INSERT INTO lunches (name, price, restaurant_id)
              ('Dinner1', 9.25, 100),
              ('Dinner2', 10.00, 101);
 
-INSERT INTO dishes (name, price)
-      VALUES  ('Eggs', 15.25),
-              ('Tea', 23.13),
-              ('Soup', 9.25),
-              ('Bread', 5.35),
-              ('Cake', 9.25),
-              ('Ice-cream', 3.50),
-              ('Porridge', 11.25),
-              ('Pasta', 10.00);
+INSERT INTO dishes (name, price, restaurant_id)
+      VALUES  ('Eggs', 15.25, 100),
+              ('Tea', 23.13, 100),
+              ('Soup', 9.25, 101),
+              ('Bread', 5.35, 101),
+              ('Cake', 9.25, 102),
+              ('Ice-cream', 3.50, 102),
+              ('Porridge', 11.25, 103),
+              ('Pasta', 10.00, 103);
 
 INSERT INTO lunch_dish (lunch_id, dish_id)
       VALUES  (100, 100),

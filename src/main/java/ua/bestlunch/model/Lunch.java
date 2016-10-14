@@ -7,12 +7,19 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-/**
- * Created by Виктор on 18.08.2016.
- */
+
+@NamedQueries({
+        @NamedQuery(name = Lunch.DELETE, query = "DELETE FROM Lunch l WHERE l.id=:id"),
+        @NamedQuery(name = Lunch.ALL_SORTED, query = "SELECT l FROM Lunch l ORDER BY l.name"),
+        @NamedQuery(name = Lunch.BYRESTAURANT, query = "SELECT l FROM Lunch l WHERE l.restaurant.id=:restaurant_id ORDER BY l.name")
+})
 @Entity
 @Table(name = "lunches")
 public class Lunch extends NamedEntity{
+
+    public static final String DELETE = "Lunch.delete";
+    public static final String ALL_SORTED = "Lunch.getAllSorted";
+    public static final String BYRESTAURANT = "Lunch.getByRestaurant";
 
     @Column(name = "price")
     private BigDecimal price;

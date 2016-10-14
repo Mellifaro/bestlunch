@@ -5,18 +5,16 @@ import ua.bestlunch.model.Restaurant;
 
 import java.util.List;
 
-/**
- * Created by Виктор on 13.09.2016.
- */
+
 public interface DishRepository {
 
     Dish save(Dish dish);
 
-    void delete(int id);
+    boolean delete(int id);
 
     Dish find(int id);
 
-    List<Dish> findAllByLunch();
+    List<Dish> findAllByLunch(int lunchId);
 
-    List<Dish> findAllByRestaurant();
+    List<Dish> findAllByRestaurant(int restaurantId);
 }
