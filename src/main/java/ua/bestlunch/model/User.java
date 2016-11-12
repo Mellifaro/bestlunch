@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -21,8 +23,13 @@ import java.util.*;
         @NamedQuery(name = User.ALL_SORTED, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email")
 })
 @Entity
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = User.GRAPH_WITH_ROLES, attributeNodes = @NamedAttributeNode("roles"))
+})
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends NamedEntity{
+
+    public static final String GRAPH_WITH_ROLES = "User.withRoles";
 
     public static final String DELETE = "User.delete";
     public static final String BYEMAIL = "User.getByEmail";
@@ -46,6 +53,17 @@ public class User extends NamedEntity{
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    public User(){
+
+    }
+
+    public User(Integer id, String name, String email, String password, Set<Role> roles) {
+        super(id, name);
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public String getEmail() {
         return email;

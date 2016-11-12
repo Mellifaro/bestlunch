@@ -15,9 +15,7 @@ import ua.bestlunch.repository.RestaurantRepository;
 import javax.sql.DataSource;
 import java.util.List;
 
-/**
- * Created by Виктор on 23.08.2016.
- */
+
 @Repository
 @Transactional(readOnly = true)
 public class JdbcRestaurantRepositoryImpl implements RestaurantRepository {
@@ -65,8 +63,8 @@ public class JdbcRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM restaurants WHERE id = ?", id);
+    public boolean delete(int id) {
+        return jdbcTemplate.update("DELETE FROM restaurants WHERE id = ?", id) != 0;
     }
 
     @Override

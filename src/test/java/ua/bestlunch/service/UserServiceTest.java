@@ -1,4 +1,4 @@
-package ua.bestlunch.service.user;
+package ua.bestlunch.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +12,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.bestlunch.model.Role;
 import ua.bestlunch.model.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -42,7 +41,6 @@ public class UserServiceTest {
         user.setName("Tirrion");
         user.setEmail("Tirrion@gmail.com");
         user.setPassword("Lannister");
-        user.setRegistered(new Date(System.currentTimeMillis()));
         Set<Role> roles = new HashSet<>();
         roles.add(Role.USER);
         user.setRoles(roles);

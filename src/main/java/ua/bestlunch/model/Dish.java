@@ -2,6 +2,7 @@ package ua.bestlunch.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @NamedQueries({
@@ -21,9 +22,71 @@ public class Dish extends NamedEntity{
     private BigDecimal price;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "dishes")
-    private Set<Lunch> lunches;
+    private List<Lunch> lunches;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
+
+    public Dish(){}
+
+    public Dish(Integer id, String name, BigDecimal price, Restaurant restaurant) {
+        super(id, name);
+        this.price = price;
+        this.restaurant = restaurant;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public List<Lunch> getLunches() {
+        return lunches;
+    }
+
+    public void setLunches(List<Lunch> lunches) {
+        this.lunches = lunches;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id='" + super.id + '\'' +
+                ", name='" + super.name + '\'' +
+                ", price=" + price +
+                ", lunches=" + lunches +
+                ", restaurant=" + restaurant +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Dish)) return false;
+        if (!super.equals(o)) return false;
+
+        Dish dish = (Dish) o;
+
+        return price != null ? price.equals(dish.price) : dish.price == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        return result;
+    }
 }

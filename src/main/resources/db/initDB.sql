@@ -27,8 +27,8 @@ CREATE TABLE restaurants (
 CREATE TABLE users
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval('user_seq'),
-  name       VARCHAR NOT NULL,
-  email      VARCHAR NOT NULL,
+  name       VARCHAR NOT NULL UNIQUE,
+  email      VARCHAR NOT NULL UNIQUE,
   password   VARCHAR NOT NULL,
   registered TIMESTAMP DEFAULT now()
 );
@@ -59,17 +59,17 @@ CREATE TABLE votes
   vote_time            TIMESTAMP DEFAULT now(),
   user_id         INTEGER NOT NULL,
   restaurant_id        INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
 );
-CREATE UNIQUE INDEX vote_date ON votes (vote_time);
+CREATE INDEX vote_date ON votes (vote_time);
 
 CREATE TABLE lunch_dish(
   lunch_id INTEGER NOT NULL,
   dish_id INTEGER NOT NULL,
   CONSTRAINT lunch_dish_idx UNIQUE (lunch_id, dish_id),
-  FOREIGN KEY (lunch_id) REFERENCES lunches (id),
-  FOREIGN KEY (dish_id) REFERENCES dishes (id)
+  FOREIGN KEY (lunch_id) REFERENCES lunches (id) ON DELETE CASCADE,
+  FOREIGN KEY (dish_id) REFERENCES dishes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_roles

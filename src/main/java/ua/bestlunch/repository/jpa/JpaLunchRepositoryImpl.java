@@ -48,4 +48,9 @@ public class JpaLunchRepositoryImpl implements LunchRepository{
     public List<Lunch> getAllByRestaurant(int restaurantId) {
         return em.createNamedQuery(Lunch.BYRESTAURANT, Lunch.class).setParameter("restaurant_id", restaurantId).getResultList();
     }
+
+    @Override
+    public Lunch getCurrentLunch(int restaurantId) {
+        return null;
+    }
 }

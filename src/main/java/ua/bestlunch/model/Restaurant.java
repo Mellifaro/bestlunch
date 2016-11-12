@@ -15,8 +15,8 @@ import java.util.Set;
 @Table(name = "restaurants")
 public class Restaurant extends NamedEntity{
 
-    public static final String DELETE = "User.delete";
-    public static final String ALL_SORTED = "User.getAllSorted";
+    public static final String DELETE = "Restaurant.delete";
+    public static final String ALL_SORTED = "Restaurant.getAllSorted";
 
     @Column(name = "address")
     @Length(min = 5)
@@ -24,13 +24,13 @@ public class Restaurant extends NamedEntity{
     private String address;
 
     @Column(name = "phone")
-    @Length(min = 6, max = 12)
+    @Length(min = 6, max = 16)
     private String phone;
 
     public Restaurant(){
     }
 
-    public Restaurant(int id, String name, String address, String phone) {
+    public Restaurant(Integer id, String name, String address, String phone) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -52,5 +52,36 @@ public class Restaurant extends NamedEntity{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id='" + super.id + '\'' +
+                ", name='" + super.name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Restaurant)) return false;
+        if (!super.equals(o)) return false;
+
+        Restaurant that = (Restaurant) o;
+
+        if (!address.equals(that.address)) return false;
+        return phone != null ? phone.equals(that.phone) : that.phone == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        return result;
     }
 }

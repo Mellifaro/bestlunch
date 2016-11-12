@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.bestlunch.service.restaurant.RestaurantService;
+import ua.bestlunch.service.RestaurantService;
 
 /**
  * Created by Виктор on 02.09.2016.
  */
+
+//delete
 @Controller
 public class RestaurantController {
 

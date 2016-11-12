@@ -35,4 +35,23 @@ public class NamedEntity extends BaseEntity{
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NamedEntity)) return false;
+        if (!super.equals(o)) return false;
+
+        NamedEntity that = (NamedEntity) o;
+
+        return name.equals(that.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }

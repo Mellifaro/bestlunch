@@ -1,10 +1,11 @@
+DELETE FROM votes;
+DELETE FROM lunch_dish;
+DELETE FROM dishes;
+DELETE FROM lunches;
 DELETE FROM users;
 DELETE FROM restaurants;
-DELETE FROM lunches;
-DELETE FROM dishes;
-DELETE FROM votes;
 DELETE FROM user_roles;
-DELETE FROM lunch_dish;
+
 
 ALTER SEQUENCE restaurant_seq RESTART WITH 100;
 ALTER SEQUENCE user_seq RESTART WITH 100;
@@ -26,11 +27,11 @@ INSERT INTO user_roles (role, user_id)
     VALUES ('USER', 100),
            ('ADMIN', 101);
 
-INSERT INTO lunches (name, price, restaurant_id)
-      VALUES ('Breakfast1', 15.25, 100),
-             ('Breakfast2', 18.35, 100),
-             ('Dinner1', 9.25, 100),
-             ('Dinner2', 10.00, 101);
+INSERT INTO lunches (name, price, restaurant_id, datetime)
+      VALUES ('Breakfast1', 15.25, 100, '2016-11-01 10:00:00'),
+             ('Breakfast2', 18.35, 100, '2016-11-01 11:00:00'),
+             ('Dinner1', 9.25, 100, '2016-11-01 12:30:00'),
+             ('Dinner2', 10.00, 101, '2016-11-01 13:00:00');
 
 INSERT INTO dishes (name, price, restaurant_id)
       VALUES  ('Eggs', 15.25, 100),
@@ -53,5 +54,7 @@ INSERT INTO lunch_dish (lunch_id, dish_id)
               (103, 107);
 
 INSERT INTO votes (user_id, restaurant_id)
-      VALUES  (101, 101);
+      VALUES  (100, 101),
+              (101, 103);
+
 

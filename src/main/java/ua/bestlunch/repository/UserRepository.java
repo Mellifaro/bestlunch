@@ -1,6 +1,7 @@
 package ua.bestlunch.repository;
 
 import ua.bestlunch.model.User;
+import ua.bestlunch.util.exception.NotFoundException;
 
 import java.util.List;
 

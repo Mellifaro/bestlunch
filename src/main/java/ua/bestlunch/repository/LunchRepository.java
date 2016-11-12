@@ -19,4 +19,6 @@ public interface LunchRepository {
     List<Lunch> getAll();
 
     List<Lunch> getAllByRestaurant(int restaurantId);
+
+    Lunch getCurrentLunch(int restaurantId);
 }

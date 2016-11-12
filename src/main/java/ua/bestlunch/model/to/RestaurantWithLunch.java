@@ -12,15 +12,17 @@ public class RestaurantWithLunch {
     private String name;
     private String address;
     private Lunch lunch;
+    private int votes;
 
     public RestaurantWithLunch() {
     }
 
-    public RestaurantWithLunch(Restaurant restaurant, Lunch lunch){
+    public RestaurantWithLunch(Restaurant restaurant, Lunch lunch, int votes){
         this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.address = restaurant.getAddress();
         this.lunch = lunch;
+        this.votes = votes;
     }
 
     public int getId() {
@@ -37,5 +39,9 @@ public class RestaurantWithLunch {
 
     public String getAddress() {
         return address;
+    }
+
+    public int getVotes() {
+        return votes;
     }
 }

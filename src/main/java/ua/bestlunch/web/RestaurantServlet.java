@@ -3,7 +3,7 @@ package ua.bestlunch.web;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.bestlunch.service.restaurant.RestaurantService;
+import ua.bestlunch.service.RestaurantService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +16,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * Created by Виктор on 13.08.2016.
  */
+//delete
 public class RestaurantServlet extends HttpServlet{
     private static final Logger LOG = getLogger(RestaurantServlet.class);
 
