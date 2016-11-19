@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -14,18 +15,20 @@ import ua.bestlunch.model.Dish;
 import ua.bestlunch.model.Lunch;
 import ua.bestlunch.model.Restaurant;
 import ua.bestlunch.repository.LunchRepository;
+import ua.bestlunch.model.convertor.TimestampConvertor;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional(readOnly = true)
 public class JdbcLunchRepositoryImpl implements LunchRepository{
 
-    private final BeanPropertyRowMapper<Lunch> ROW_MAPPER_LUNCH = BeanPropertyRowMapper.newInstance(Lunch.class);
+    private final RowMapper<Lunch> ROW_MAPPER_LUNCH =
+            (rs, rowNum) -> new Lunch(rs.getInt("id"), rs.getString("name"),
+                            rs.getBigDecimal("price"), rs.getTimestamp("datetime").toLocalDateTime());
     private final BeanPropertyRowMapper<Dish> ROW_MAPPER_DISH = BeanPropertyRowMapper.newInstance(Dish.class);
     private final BeanPropertyRowMapper<Restaurant> ROW_MAPPER_RESTAURANT = BeanPropertyRowMapper.newInstance(Restaurant.class);
 
@@ -56,7 +59,7 @@ public class JdbcLunchRepositoryImpl implements LunchRepository{
                 .addValue("restaurant_id", lunch.getRestaurant().getId())
                 .addValue("name", lunch.getName())
                 .addValue("price", lunch.getPrice())
-                .addValue("datetime", lunch.getDateTime());
+                .addValue("datetime", toDbValue(lunch.getDateTime()));
         if(lunch.isNew()){
             Number newId = insertLunch.executeAndReturnKey(map);
             lunch.setId(newId.intValue());

@@ -8,7 +8,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.BYLUNCH, query = "SELECT d FROM Dish d WHERE :lunch IN elements(d.lunches)"),
-        @NamedQuery(name = Dish.BYRESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restaurantId")
+        @NamedQuery(name = Dish.BYRESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant=:restaurant")
 })
 @Entity
 @Table(name = "dishes")

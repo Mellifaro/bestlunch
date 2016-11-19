@@ -21,4 +21,6 @@ public interface RestaurantService {
     List<Restaurant> getAll();
 
     List<RestaurantWithLunch> getAllWithLunches();
+
+    void evictCache();
 }

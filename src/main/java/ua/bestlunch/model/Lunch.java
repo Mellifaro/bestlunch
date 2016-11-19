@@ -26,6 +26,7 @@ public class Lunch extends NamedEntity{
     @Column(name = "price")
     private BigDecimal price;
 
+
     @Column(name = "datetime")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;

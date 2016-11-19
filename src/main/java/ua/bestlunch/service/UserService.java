@@ -20,7 +20,7 @@ public interface UserService {
 
     List<User> getAll();
 
-//    void evictCache();
+    void evictCache();
 
 //    void enable(int id, boolean enable);
 }

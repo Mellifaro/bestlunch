@@ -3,6 +3,8 @@ package ua.bestlunch.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.bestlunch.model.Lunch;
 import ua.bestlunch.model.Restaurant;
@@ -35,28 +37,32 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
     @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
     public Restaurant update(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
     @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
     public void delete(int id) {
         ExceptionUtil.checkNotFoundWithId(restaurantRepository.delete(id), id);
     }
 
     @Override
+    @Cacheable("restaurants")
     public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
     }
 
     @Override
     public List<RestaurantWithLunch> getAllWithLunches() {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+        List<Restaurant> restaurants = getAll();
         List<RestaurantWithLunch> withLunches = new ArrayList<>();
 
         for(Restaurant r : restaurants){
@@ -66,5 +72,11 @@ public class RestaurantServiceImpl implements RestaurantService {
             withLunches.add(restaurantWithLunch);
         }
         return withLunches;
+    }
+
+    @Override
+    @CacheEvict(value = "restaurants", allEntries = true)
+    public void evictCache() {
+
     }
 }

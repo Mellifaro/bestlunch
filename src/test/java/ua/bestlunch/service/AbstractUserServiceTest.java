@@ -1,6 +1,7 @@
 package ua.bestlunch.service;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,12 @@ public class AbstractUserServiceTest extends AbstractServiceTest{
     @Autowired
     protected UserService service;
 
+    @Before
+    public void setUp(){
+        service.evictCache();
+    }
+
     @Test
-    @Transactional
     public void testSave(){
         User newUser = new User(null, "New User", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
         User created = service.save(newUser);
@@ -37,15 +42,12 @@ public class AbstractUserServiceTest extends AbstractServiceTest{
     }
 
     @Test(expected = DataAccessException.class)
-    @Transactional
-    @Rollback
     public void testDuplicateNameSave(){
         User newUser = new User(null, "Admin", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
         User created = service.save(newUser);
     }
 
     @Test(expected = DataAccessException.class)
-    @Transactional
     public void testDuplicateMailSave(){
         User newUser = new User(null, "New User", "admin@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
         User created = service.save(newUser);
@@ -94,7 +96,7 @@ public class AbstractUserServiceTest extends AbstractServiceTest{
     @Test
     public void testGetAll(){
         int size = service.getAll().size();
-        Assert.assertEquals(size, 2);
+        Assert.assertEquals(2, size);
     }
 
     @Test

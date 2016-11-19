@@ -31,7 +31,7 @@ public class JpaLunchRepositoryImpl implements LunchRepository{
     @Override
     @Transactional
     public boolean delete(int id) {
-        return em.createNamedQuery(Lunch.DELETE, Lunch.class).setParameter("id", id).executeUpdate() != 0;
+        return em.createNamedQuery(Lunch.DELETE).setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override

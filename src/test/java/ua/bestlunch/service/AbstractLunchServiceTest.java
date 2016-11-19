@@ -24,7 +24,7 @@ public class AbstractLunchServiceTest extends AbstractServiceTest{
     public void testGet(){
         Lunch found = service.get(100);
         LOG.info(found.toString());
-        Assert.assertEquals(found, LUNCH1);
+        Assert.assertEquals(LUNCH1, found);
     }
 
     @Test(expected = NotFoundException.class)

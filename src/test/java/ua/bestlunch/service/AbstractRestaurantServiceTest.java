@@ -1,6 +1,7 @@
 package ua.bestlunch.service;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class AbstractRestaurantServiceTest extends AbstractServiceTest{
 
     @Autowired
     protected RestaurantService service;
+
+    @Before
+    public void setUp(){
+        service.evictCache();
+    }
 
     @Test
     public void testGet(){
@@ -68,7 +74,7 @@ public class AbstractRestaurantServiceTest extends AbstractServiceTest{
     @Test
     public void testGetAll(){
         List<Restaurant> restaurants = service.getAll();
-        Assert.assertEquals(restaurants.size(), 4);
+        Assert.assertEquals(4, restaurants.size());
     }
 
     @Test

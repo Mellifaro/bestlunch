@@ -23,7 +23,7 @@ import java.util.Set;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = {"classpath:db/initDB.sql", "classpath:db/populateDB.sql"},
+@Sql(scripts = {"classpath:db/initDB_postgres.sql", "classpath:db/populateDB.sql"},
         config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class UserServiceTest {
 

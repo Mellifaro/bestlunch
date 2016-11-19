@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.Restaurant;
+import ua.bestlunch.model.User;
 import ua.bestlunch.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
@@ -33,7 +34,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     @Transactional
     public boolean delete(int id) {
-        return em.createNamedQuery(Restaurant.DELETE, Restaurant.class).setParameter("id", id).executeUpdate() != 0;
+        return em.createNamedQuery(Restaurant.DELETE).setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override

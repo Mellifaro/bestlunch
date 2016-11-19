@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.Dish;
 import ua.bestlunch.model.Lunch;
+import ua.bestlunch.model.Restaurant;
 import ua.bestlunch.repository.DishRepository;
 
 import javax.persistence.EntityManager;
@@ -32,7 +33,7 @@ public class JpaDishRepositoryImpl implements DishRepository{
     @Override
     @Transactional
     public boolean delete(int id) {
-        return em.createNamedQuery(Dish.DELETE, Dish.class).setParameter("id", id).executeUpdate() != 0;
+        return em.createNamedQuery(Dish.DELETE).setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override
@@ -55,6 +56,7 @@ public class JpaDishRepositoryImpl implements DishRepository{
     @Override
     //restaurant.id  - may be a mistake. And in annotation too
     public List<Dish> findAllByRestaurant(int restaurantId) {
-        return em.createNamedQuery(Dish.BYRESTAURANT, Dish.class).setParameter("restaurant.id", restaurantId).getResultList();
+        Restaurant restaurant = em.find(Restaurant.class, restaurantId);
+        return em.createNamedQuery(Dish.BYRESTAURANT, Dish.class).setParameter("restaurant", restaurant).getResultList();
     }
 }
