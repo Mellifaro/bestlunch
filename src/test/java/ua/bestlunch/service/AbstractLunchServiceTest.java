@@ -15,7 +15,7 @@ import static ua.bestlunch.LunchTestData.*;
 /**
  * Created by Виктор on 21.10.2016.
  */
-public class AbstractLunchServiceTest extends AbstractServiceTest{
+public abstract class AbstractLunchServiceTest extends AbstractServiceTest{
 
     @Autowired
     protected LunchService service;

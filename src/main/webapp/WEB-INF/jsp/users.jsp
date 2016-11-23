@@ -6,10 +6,11 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
 <head>
-    <title>Restaurants</title>
+    <title>Users</title>
 
     <style type="text/css">
         .tg {
@@ -67,35 +68,35 @@
 
 </head>
 <body>
-    <h1>Restaurants</h1>
-    <table table class="table table-striped table-bordered">
-        <tr class="success">
-            <th width="80">id</th>
-            <th width="80">name</th>
-            <th width="80">address</th>
-            <th width="80">lunch</th>
-            <th width="80">votes</th>
-            <th width="80">edit</th>
-            <th width="80">delete</th>
+Language : <a href="?language=en">English</a>|<a href="?language=ru">Russian|<a href="?language=ua">Ukrainian</a><br>
+Current Locale : ${pageContext.response.locale}
+<h1><spring:message code="userlist.name" text="default text"/> </h1>
+<table table class="table table-striped table-bordered">
+    <tr class="success">
+        <th width="80">id</th>
+        <th width="80">name</th>
+        <th width="80">email</th>
+        <th width="80">password</th>
+        <th width="80">registered</th>
+        <th width="80">roles</th>
+        <th width="80">edit</th>
+        <th width="80">delete</th>
+    </tr>
+    </thead>
+    <c:forEach items="${users}" var="user">
+        <jsp:useBean id="user" scope="page" type="ua.bestlunch.model.User"/>
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td>${user.password}</td>
+        <td>${user.registered}</td>
+        <td>${user.roles}</td>
+        <td><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
+        <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
         </tr>
-        </thead>
-        <c:forEach items="${restaurants}" var="restaurant">
-            <jsp:useBean id="restaurant" scope="page" type="ua.bestlunch.model.to.RestaurantWithLunch"/>
-                <td>${restaurant.id}</td>
-                <td>${restaurant.name}</td>
-                <td>${restaurant.address}</td>
-                <td>${restaurant.lunch.name}<br>
-                    <c:forEach items="${restaurant.lunch.dishes}" var="dish">
-                        ${dish.name}<br>
-                    </c:forEach>
-                </td>
-                <td>${restaurant.votes}</td>
-                <td><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
-                <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-    <button type="button" class="btn btn-primary">Add restaurant</button>
+    </c:forEach>
+</table>
+<button type="button" class="btn btn-primary">Add user</button>
 
 
 </body>

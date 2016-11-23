@@ -17,7 +17,7 @@ import static ua.bestlunch.DishTestData.*;
 /**
  * Created by Виктор on 21.10.2016.
  */
-public class AbstractDishServiceTest extends AbstractServiceTest{
+public abstract class AbstractDishServiceTest extends AbstractServiceTest{
 
     @Autowired
     protected DishService service;

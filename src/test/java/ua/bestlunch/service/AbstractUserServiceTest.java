@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.Role;
 import ua.bestlunch.model.User;
+import ua.bestlunch.repository.JpaUtil;
 import ua.bestlunch.util.exception.NotFoundException;
 
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ import java.util.HashSet;
 /**
  * Created by Виктор on 21.10.2016.
  */
-public class AbstractUserServiceTest extends AbstractServiceTest{
+public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Autowired
     protected UserService service;
@@ -28,6 +29,7 @@ public class AbstractUserServiceTest extends AbstractServiceTest{
     @Before
     public void setUp(){
         service.evictCache();
+
     }
 
     @Test

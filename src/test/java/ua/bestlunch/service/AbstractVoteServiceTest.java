@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * Created by Виктор on 21.10.2016.
  */
-public class AbstractVoteServiceTest extends AbstractServiceTest{
+public abstract class AbstractVoteServiceTest extends AbstractServiceTest{
 
     @Autowired
     protected VoteService service;

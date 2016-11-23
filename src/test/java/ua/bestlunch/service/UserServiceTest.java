@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.bestlunch.model.Role;
 import ua.bestlunch.model.User;
+import ua.bestlunch.repository.JpaUtil;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -25,12 +26,13 @@ import java.util.Set;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = {"classpath:db/initDB_postgres.sql", "classpath:db/populateDB.sql"},
         config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class UserServiceTest {
+public abstract class UserServiceTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceTest.class);
 
     @Autowired
     private UserService service;
+
 
     @Test
     public void save() throws Exception {

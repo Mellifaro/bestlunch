@@ -1,7 +1,13 @@
 package ua.bestlunch.service.datajpa;
 
+import org.springframework.test.context.ActiveProfiles;
+import ua.bestlunch.service.AbstractLunchServiceTest;
+
+import static ua.bestlunch.Profiles.DATAJPA;
+
 /**
  * Created by Виктор on 21.10.2016.
  */
-public class DataJpaLunchServiceTest {
+@ActiveProfiles(DATAJPA)
+public class DataJpaLunchServiceTest extends AbstractLunchServiceTest{
 }

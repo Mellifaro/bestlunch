@@ -28,10 +28,10 @@ INSERT INTO user_roles (role, user_id)
            ('ADMIN', 101);
 
 INSERT INTO lunches (name, price, restaurant_id, datetime)
-      VALUES ('Breakfast1', 15.25, 100, '2016-11-01 10:00:00'),
-             ('Breakfast2', 18.35, 100, '2016-11-01 11:00:00'),
-             ('Dinner1', 9.25, 100, '2016-11-01 12:30:00'),
-             ('Dinner2', 10.00, 101, '2016-11-01 13:00:00');
+      VALUES ('Breakfast1', 15.25, 100, '2016-11-22 10:00:00'),
+             ('Breakfast2', 18.35, 101, '2016-11-22 11:00:00'),
+             ('Dinner1', 9.25, 102, '2016-11-22 12:30:00'),
+             ('Dinner2', 10.00, 103, '2016-11-22 13:00:00');
 
 INSERT INTO dishes (name, price, restaurant_id)
       VALUES  ('Eggs', 15.25, 100),

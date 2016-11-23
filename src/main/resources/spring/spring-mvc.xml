@@ -11,4 +11,32 @@
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"/>
 
+    <!--Spring internaliozation-->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+          <property name="defaultLocale" value="en"/>
+    </bean>
+
+    <!--It is necessary to register interceptor in mvc context    -->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+              <property name="paramName" value="language" />
+        </bean>
+    </mvc:interceptors>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">-->
+        <!--<property name="interceptors">-->
+            <!--<list>-->
+                <!--<ref bean="localeChangeInterceptor"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!-- Register the messages.properties -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+          <property name="basename" value="messages"/>
+    </bean>
+
 </beans>

@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Restaurants</title>
+    <title>Votes</title>
 
     <style type="text/css">
         .tg {
@@ -67,35 +67,29 @@
 
 </head>
 <body>
-    <h1>Restaurants</h1>
-    <table table class="table table-striped table-bordered">
-        <tr class="success">
-            <th width="80">id</th>
-            <th width="80">name</th>
-            <th width="80">address</th>
-            <th width="80">lunch</th>
-            <th width="80">votes</th>
-            <th width="80">edit</th>
-            <th width="80">delete</th>
+<h1>Votes</h1>
+<table table class="table table-striped table-bordered">
+    <tr class="success">
+        <th width="80">id</th>
+        <th width="80">user</th>
+        <th width="80">restaurant</th>
+        <th width="80">datetime</th>
+        <th width="80">edit</th>
+        <th width="80">delete</th>
+    </tr>
+    </thead>
+    <c:forEach items="${votes}" var="vote">
+        <jsp:useBean id="vote" scope="page" type="ua.bestlunch.model.Vote"/>
+        <td>${vote.id}</td>
+        <td>${vote.user.name}</td>
+        <td>${vote.restaurant.name}</td>
+        <td>${vote.time}</td>
+        <td><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
+        <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
         </tr>
-        </thead>
-        <c:forEach items="${restaurants}" var="restaurant">
-            <jsp:useBean id="restaurant" scope="page" type="ua.bestlunch.model.to.RestaurantWithLunch"/>
-                <td>${restaurant.id}</td>
-                <td>${restaurant.name}</td>
-                <td>${restaurant.address}</td>
-                <td>${restaurant.lunch.name}<br>
-                    <c:forEach items="${restaurant.lunch.dishes}" var="dish">
-                        ${dish.name}<br>
-                    </c:forEach>
-                </td>
-                <td>${restaurant.votes}</td>
-                <td><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
-                <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-    <button type="button" class="btn btn-primary">Add restaurant</button>
+    </c:forEach>
+</table>
+<button type="button" class="btn btn-primary">Add user</button>
 
 
 </body>

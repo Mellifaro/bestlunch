@@ -24,7 +24,7 @@
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-mvc.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/spring-tools.xml</file>
         </fileset>
-        <fileset id="web application context" profiles="jpa,postgres" autodetected="true" />
+        <fileset id="web application context" profiles="tomcat,jpa" autodetected="true" />
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
@@ -98,7 +98,7 @@
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.10.2.2.21" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:2.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:9.4.1208" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:8.0.33" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.0.33" level="project" />
   </component>
 </module>

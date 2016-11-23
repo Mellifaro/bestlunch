@@ -19,6 +19,7 @@ import ua.bestlunch.model.convertor.TimestampConvertor;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -113,6 +114,10 @@ public class JdbcLunchRepositoryImpl implements LunchRepository{
 
     @Override
     public Lunch getCurrentLunch(int restaurantId) {
-        return null;
+        LocalDate before = LocalDate.now();
+        LocalDate after = before.plusDays(1);
+        List<Lunch> lunches = jdbcTemplate.query("SELECT * FROM lunches WHERE restaurant_id=? AND datetime BETWEEN ? and ?", ROW_MAPPER_LUNCH, restaurantId, before, after);
+        lunches.forEach(lunch -> insertDishes(lunch));
+        return DataAccessUtils.singleResult(lunches);
     }
 }

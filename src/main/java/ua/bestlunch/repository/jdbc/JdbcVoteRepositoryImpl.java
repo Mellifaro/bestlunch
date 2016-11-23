@@ -68,6 +68,7 @@ public class JdbcVoteRepositoryImpl implements VoteRepository{
     }
 
     @Override
+    //is not working. Need to make ROW_MAPPER
     public List<Vote> getAllByUser(User user) {
         List<Vote> votes = jdbcTemplate.query("SELECT * FROM votes WHERE user_id = ?", ROW_MAPPER, user.getId());
         return votes;
