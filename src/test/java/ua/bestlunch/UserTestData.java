@@ -11,6 +11,10 @@ import java.util.List;
  * Created by Виктор on 01.11.2016.
  */
 public class UserTestData {
+
+    public static final int ADMIN_ID = 100;
+    public static final int USER_ID = 101;
+
     public static final User ADMIN = new User(100, "Admin", "admin@gmail.com", "admin", EnumSet.of(Role.ADMIN));
     public static final User USER1 = new User(101, "User", "user@gmail.com", "user", EnumSet.of(Role.USER));
 

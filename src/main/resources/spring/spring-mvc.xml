@@ -5,7 +5,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-        <context:component-scan base-package="ua.bestlunch.web" />
+    <context:component-scan base-package="ua.bestlunch.web" />
+
+    <bean class="ua.bestlunch.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
+    <mvc:default-servlet-handler/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
@@ -37,6 +51,7 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
           <property name="basename" value="messages"/>
+          <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
 </beans>

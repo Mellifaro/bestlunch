@@ -95,6 +95,11 @@
             </tr>
         </c:forEach>
     </table>
+
+    <div id="browse_app">
+        <a class="btn btn-large btn-info" href="addrestaurant">Add restaurant</a>
+    </div>
+
     <button type="button" class="btn btn-primary">Add restaurant</button>
 
 

@@ -38,6 +38,12 @@
         <url-pattern>/bestlunch/*</url-pattern>
     </servlet-mapping>
 
-
+    <!--for jdbc connection pool-->
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/bestlunch</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 
 </web-app>

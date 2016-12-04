@@ -18,7 +18,7 @@ import java.sql.Connection;
  */
 
 //delete
-@RestController
+
 public class RestaurantController {
 
     @Autowired
@@ -45,13 +45,6 @@ public class RestaurantController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     private String getAllUsers(ModelMap model){
-        try {
-            InitialContext initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/bestlunch");
-            Connection conn = ds.getConnection();
-        }catch (Throwable e){
-            e.printStackTrace();
-        }
         model.addAttribute("users", userService.getAll());
         return "users";
     }
