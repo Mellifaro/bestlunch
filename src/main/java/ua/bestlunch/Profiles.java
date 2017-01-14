@@ -14,5 +14,5 @@ public class Profiles {
             HEROKU = "heroku";
 
     public static final String ACTIVE_DB = POSTGRES;
-    public static final String DB_IMPLEMENTATION = JPA;
+    public static final String DB_IMPLEMENTATION = JDBC;
 }

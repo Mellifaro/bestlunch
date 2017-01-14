@@ -2,25 +2,19 @@ package ua.bestlunch.service;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.Role;
 import ua.bestlunch.model.User;
-import ua.bestlunch.repository.JpaUtil;
 import ua.bestlunch.util.exception.NotFoundException;
 
-import java.time.LocalDate;
 import java.util.EnumSet;
-import java.util.HashSet;
 
 /**
  * Created by Виктор on 21.10.2016.
  */
+//TODO CORRECT ALL TEST TO MATCHERS
 public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Autowired
@@ -34,7 +28,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Test
     public void testSave(){
-        User newUser = new User(null, "New User", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "New User", "newuser@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
         newUser.setId(created.getId());
 
@@ -45,13 +39,13 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateNameSave(){
-        User newUser = new User(null, "Admin", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "Admin", "newuser@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
     }
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailSave(){
-        User newUser = new User(null, "New User", "admin@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "New User", "admin@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
     }
 
@@ -72,7 +66,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Test
     public void testGet(){
-        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
         newUser.setId(created.getId());
 
@@ -88,7 +82,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Test
     public void testGetByEmail(){
-        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
         User byEmail = service.getByEmail("newuser@gmail.com");
 
@@ -103,11 +97,11 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest{
 
     @Test
     public void testUpdate(){
-        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.USER, Role.ADMIN));
+        User newUser = new User(null, "NewUser", "newuser@gmail.com", "passwerd", EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         User created = service.save(newUser);
         created.setName("LastUser");
         created.setEmail("lastuser@yahoo.com");
-        created.setRoles(EnumSet.of(Role.USER));
+        created.setRoles(EnumSet.of(Role.ROLE_USER));
 
         service.update(created);
         Assert.assertEquals(created, service.get(created.getId()));

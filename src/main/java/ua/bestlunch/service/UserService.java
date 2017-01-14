@@ -22,5 +22,5 @@ public interface UserService {
 
     void evictCache();
 
-//    void enable(int id, boolean enable);
+    void enable(int id, boolean enabled);
 }

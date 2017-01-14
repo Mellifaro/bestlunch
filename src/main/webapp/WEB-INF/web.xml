@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>tomcat,jpa</param-value>
+        <param-value>tomcat,jdbc</param-value>
     </context-param>
 
     <context-param>
@@ -37,6 +37,16 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/bestlunch/*</url-pattern>
     </servlet-mapping>
+
+    <!--Spring Security-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!--for jdbc connection pool-->
     <resource-ref>

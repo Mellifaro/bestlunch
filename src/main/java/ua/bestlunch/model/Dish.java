@@ -70,23 +70,4 @@ public class Dish extends NamedEntity{
                 ", restaurant=" + restaurant +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Dish)) return false;
-        if (!super.equals(o)) return false;
-
-        Dish dish = (Dish) o;
-
-        return price != null ? price.equals(dish.price) : dish.price == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
-    }
 }

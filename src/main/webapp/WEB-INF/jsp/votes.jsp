@@ -1,96 +1,56 @@
 <!DOCTYPE html>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
 <head>
-    <title>Votes</title>
-
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-        .text {
-            font-family: "Times New Roman", sans-serif;
-            font-size: 30px;
-            text-align:  center;
-        }
-        .text1 {
-            font-family: "Times New Roman", sans-serif;
-            font-size: 30px;
-            text-align:  left;
-        }
-        .text2 {
-            font-family: "Times New Roman", sans-serif;
-            font-size: 14px;
-            text-align:  center;
-        }
-    </style>
-
+    <jsp:include page="fragments/headTag.jsp"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
 </head>
 <body>
-<h1>Votes</h1>
-<table table class="table table-striped table-bordered">
-    <tr class="success">
-        <th width="80">id</th>
-        <th width="80">user</th>
-        <th width="80">restaurant</th>
-        <th width="80">datetime</th>
-        <th width="80">edit</th>
-        <th width="80">delete</th>
-    </tr>
-    </thead>
-    <c:forEach items="${votes}" var="vote">
-        <jsp:useBean id="vote" scope="page" type="ua.bestlunch.model.Vote"/>
-        <td>${vote.id}</td>
-        <td>${vote.user.name}</td>
-        <td>${vote.restaurant.name}</td>
-        <td>${vote.time}</td>
-        <td><a href="restaurants?action=update&id=${restaurant.id}">Update</a></td>
-        <td><a href="restaurants?action=delete&id=${restaurant.id}">Delete</a></td>
-        </tr>
-    </c:forEach>
-</table>
-<button type="button" class="btn btn-primary">Add user</button>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 
+
+<%--Language : <a href="?language=en">English</a>|<a href="?language=ru">Russian|<a href="?language=ua">Ukrainian</a><br>--%>
+<%--Current Locale : ${pageContext.response.locale}--%>
+<%--<h1><spring:message code="userlist.name" text="default text"/> </h1>--%>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="shadow">
+            <h3>My votes</h3>
+
+            <div class="view-box">
+                <table class="table table-striped display" id="datatable">
+                    <thead>
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Datetime</th>
+                    </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<jsp:include page="fragments/footer.jsp"/>
 
 </body>
+<%--<script type="text/javascript">--%>
+<%--<jsp:include page="fragments/i18n.jsp"/>--%>
+<%--</script>--%>
+<script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+<script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
+<script type="text/javascript" src="resources/js/lunchDatatable.js"></script>
+<script type="text/javascript" src="resources/js/navbaar.js"></script>
 </html>

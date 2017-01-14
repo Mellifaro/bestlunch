@@ -11,6 +11,7 @@ public class RestaurantWithLunch {
     private int id;
     private String name;
     private String address;
+    private String phone;
     private Lunch lunch;
     private int votes;
 
@@ -21,6 +22,7 @@ public class RestaurantWithLunch {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.address = restaurant.getAddress();
+        this.phone = restaurant.getPhone();
         this.lunch = lunch;
         this.votes = votes;
     }
@@ -43,5 +45,9 @@ public class RestaurantWithLunch {
 
     public int getVotes() {
         return votes;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.User;
 import ua.bestlunch.model.Vote;
+import ua.bestlunch.repository.RestaurantRepository;
+import ua.bestlunch.repository.UserRepository;
 import ua.bestlunch.repository.VoteRepository;
 
 import javax.sql.DataSource;
@@ -26,10 +28,17 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JdbcVoteRepositoryImpl implements VoteRepository{
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
+
     private final RowMapper<Vote> ROW_MAPPER = new RowMapper<Vote>() {
         @Override
         public Vote mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Vote();
+            return new Vote(rs.getInt("id"), userRepository.get(rs.getInt("user_id")),
+                    restaurantRepository.find(rs.getInt("restaurant_id")), rs.getTimestamp("vote_time").toLocalDateTime());
         }
     };
 

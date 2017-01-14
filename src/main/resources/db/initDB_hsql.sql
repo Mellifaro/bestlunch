@@ -30,7 +30,8 @@ CREATE TABLE users
   name       VARCHAR(255) NOT NULL UNIQUE,
   email      VARCHAR(255) NOT NULL UNIQUE,
   password   VARCHAR(255) NOT NULL,
-  registered TIMESTAMP DEFAULT now()
+  registered TIMESTAMP DEFAULT now(),
+  enabled    BOOLEAN DEFAULT TRUE
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
@@ -60,7 +61,7 @@ CREATE TABLE votes
   user_id         INTEGER NOT NULL,
   restaurant_id   INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id)
+  FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 CREATE INDEX vote_date ON votes (vote_time);
 

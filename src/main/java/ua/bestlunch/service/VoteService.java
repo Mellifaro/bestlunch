@@ -9,9 +9,11 @@ import java.util.List;
 
 public interface VoteService {
 
-    Vote addVote(Vote vote);
+    Vote addVote(User user, int restId);
 
     void cancelVote(User user);
+
+    Vote getCurrentVote(User user);
 
     List<Vote> findAllByUser(User user);
 

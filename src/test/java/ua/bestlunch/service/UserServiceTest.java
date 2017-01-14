@@ -11,10 +11,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.bestlunch.model.Role;
 import ua.bestlunch.model.User;
-import ua.bestlunch.repository.JpaUtil;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,7 +41,7 @@ public abstract class UserServiceTest {
         user.setEmail("Tirrion@gmail.com");
         user.setPassword("Lannister");
         Set<Role> roles = new HashSet<>();
-        roles.add(Role.USER);
+        roles.add(Role.ROLE_USER);
         user.setRoles(roles);
         service.save(user);
 

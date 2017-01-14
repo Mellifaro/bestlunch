@@ -50,6 +50,9 @@ public class User extends NamedEntity{
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     private Date registered = new Date();
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
@@ -92,6 +95,14 @@ public class User extends NamedEntity{
         this.registered = registered;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -106,6 +117,7 @@ public class User extends NamedEntity{
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", registered=" + registered +
+                ", enabled=" + enabled +
                 ", roles=" + roles +
                 '}';
     }

@@ -24,14 +24,14 @@ INSERT INTO users (name, email, password)
            ('User',  'user@gmail.com',  'user');
 
 INSERT INTO user_roles (role, user_id)
-    VALUES ('USER', 100),
-           ('ADMIN', 101);
+    VALUES ('USER', 101),
+           ('ADMIN', 100);
 
 INSERT INTO lunches (name, price, restaurant_id, datetime)
-      VALUES ('Breakfast1', 15.25, 100, '2016-11-22 10:00:00'),
-             ('Breakfast2', 18.35, 101, '2016-11-22 11:00:00'),
-             ('Dinner1', 9.25, 102, '2016-11-22 12:30:00'),
-             ('Dinner2', 10.00, 103, '2016-11-22 13:00:00');
+      VALUES ('Breakfast1', 15.25, 100, '2016-12-23 10:00:00'),
+             ('Breakfast2', 18.35, 101, '2016-12-23 11:00:00'),
+             ('Dinner1', 9.25, 102, '2016-12-23 12:30:00'),
+             ('Dinner2', 10.00, 103, '2016-12-23 13:00:00');
 
 INSERT INTO dishes (name, price, restaurant_id)
       VALUES  ('Eggs', 15.25, 100),

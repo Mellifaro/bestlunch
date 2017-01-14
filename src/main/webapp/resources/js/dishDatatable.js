@@ -1,0 +1,1 @@
+var ajaxUrl = 'bestlunch/ajax/restaurants/';

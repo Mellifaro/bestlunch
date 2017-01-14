@@ -76,25 +76,4 @@ public class Restaurant extends NamedEntity{
                 ", phone='" + phone + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Restaurant)) return false;
-        if (!super.equals(o)) return false;
-
-        Restaurant that = (Restaurant) o;
-
-        if (!address.equals(that.address)) return false;
-        return phone != null ? phone.equals(that.phone) : that.phone == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        return result;
-    }
 }

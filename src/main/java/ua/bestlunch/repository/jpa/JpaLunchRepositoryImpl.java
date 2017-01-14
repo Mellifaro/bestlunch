@@ -4,10 +4,12 @@ package ua.bestlunch.repository.jpa;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bestlunch.model.Lunch;
+import ua.bestlunch.model.Vote;
 import ua.bestlunch.repository.LunchRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -51,6 +53,16 @@ public class JpaLunchRepositoryImpl implements LunchRepository{
 
     @Override
     public Lunch getCurrentLunch(int restaurantId) {
-        return null;
+        LocalDate before = LocalDate.now();
+        LocalDate after = before.plusDays(1);
+
+        List<Lunch> lunches = em.createNamedQuery(Lunch.CURRENTLUNCH, Lunch.class)
+                .setParameter("startTime", before)
+                .setParameter("endTime", after)
+                .getResultList();
+        if(lunches.size() > 1){
+            throw new IllegalStateException("There are too many current lunches in database");
+        }
+        return lunches.isEmpty() ? null : lunches.get(0);
     }
 }

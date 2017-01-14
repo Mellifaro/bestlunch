@@ -3,7 +3,11 @@ package ua.bestlunch.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ua.bestlunch.AuthorizedUser;
 import ua.bestlunch.model.User;
 import ua.bestlunch.repository.UserRepository;
 import ua.bestlunch.service.UserService;
@@ -12,8 +16,8 @@ import ua.bestlunch.util.exception.NotFoundException;
 
 import java.util.List;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -56,5 +60,21 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(value = "users", allEntries = true)
     public void evictCache() {
 
+    }
+
+    @Override
+    public void enable(int id, boolean enabled) {
+        User user = repository.get(id);
+        user.setEnabled(enabled);
+        repository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User u = repository.getByEmail(email);
+        if(u == null){
+            throw new UsernameNotFoundException("User " + email + " in not found");
+        }
+        return new AuthorizedUser(u);
     }
 }

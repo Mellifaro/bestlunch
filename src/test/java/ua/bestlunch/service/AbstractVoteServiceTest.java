@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 /**
  * Created by Виктор on 21.10.2016.
  */
+//TODO CORRECT ALL TEST TO MATCHERS
 public abstract class AbstractVoteServiceTest extends AbstractServiceTest{
 
     @Autowired

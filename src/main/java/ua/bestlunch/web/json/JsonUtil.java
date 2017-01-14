@@ -1,11 +1,15 @@
 package ua.bestlunch.web.json;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import ua.bestlunch.util.mapper.HibernateAwareObjectMapper;
 
 import java.io.IOException;
+import java.util.List;
+
+import static ua.bestlunch.web.json.JacksonObjectMapper.*;
 
 /**
  * Created by Виктор on 01.12.2016.
@@ -13,18 +17,28 @@ import java.io.IOException;
 //Serialize and deserialize objects to json
 public class JsonUtil {
 
-    private  static final ObjectMapper mapper = new HibernateAwareObjectMapper();
-
-    public static <T> MappingIterator<T> readValues(String json, Class<T> clazz) throws IOException {
-        ObjectReader reader = mapper.reader(clazz);
-        return reader.readValues(json);
+    public static <T> List<T> readValues(String json, Class<T> clazz){
+        ObjectReader reader = getMapper().reader(clazz);
+        try{
+            return reader.<T>readValues(json).readAll();
+        }catch (IOException e){
+            throw new IllegalArgumentException("Invalid read array from JSON:\n'" + json + "'", e);
+        }
     }
 
-    public static <T> T readValue(String json, Class<T> clazz) throws IOException{
-        return mapper.readValue(json, clazz);
+    public static <T> T readValue(String json, Class<T> clazz){
+        try {
+            return getMapper().readValue(json, clazz);
+        }catch (IOException e){
+            throw new IllegalArgumentException("Invalid read from JSON:\n'" + json + "'", e);
+        }
     }
 
-    public static <T> String writeValue(T obj) throws IOException{
-        return mapper.writeValueAsString(obj);
+    public static <T> String writeValue(T obj){
+        try {
+            return getMapper().writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new IllegalStateException("Invalid write to JSON:\n'" + obj + "'", e);
+        }
     }
 }
