@@ -1,4 +1,4 @@
-var ajaxUrl = 'bestlunch/ajax/admin/users/';
+var ajaxUrl = 'ajax/admin/users/';
 var datatableApi;
 
 $(function () {

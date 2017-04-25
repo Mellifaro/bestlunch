@@ -57,7 +57,9 @@ public class JdbcUserRepositoryImpl implements UserRepository{
                 .addValue("name", user.getName())
                 .addValue("email", user.getEmail())
                 .addValue("password", user.getPassword())
-                .addValue("registered", user.getRegistered());
+                .addValue("registered", user.getRegistered())
+                .addValue("enabled", user.isEnabled());
+
 
         if(user.isNew()){
             Number newId = insertRestaurant.executeAndReturnKey(map);
@@ -68,7 +70,7 @@ public class JdbcUserRepositoryImpl implements UserRepository{
             insertRoles(user);
             namedParameterJdbcTemplate.update(
                     "UPDATE users SET name=:name, email=:email, password=:password, " +
-                            "registered=:registered WHERE id=:id", map);
+                            "registered=:registered, enabled=:enabled WHERE id=:id", map);
         }
         return user;
     }
@@ -89,6 +91,7 @@ public class JdbcUserRepositoryImpl implements UserRepository{
     @Override
     public User getByEmail(String email) {
         List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
+        users.forEach(this::setRoles);
         return DataAccessUtils.singleResult(users);
     }
 

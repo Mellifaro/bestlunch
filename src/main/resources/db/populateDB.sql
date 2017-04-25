@@ -19,19 +19,19 @@ INSERT INTO restaurants(name, address, phone)
            ('Lion',   'Soborna, 41', '+380635254000'),
            ('Velur',  'Boguna, 54', '+380635254101');
 
-INSERT INTO users (name, email, password)
-    VALUES ('Admin', 'admin@gmail.com', 'admin'),
-           ('User',  'user@gmail.com',  'user');
+INSERT INTO users (name, email, password, enabled)
+    VALUES ('Admin', 'admin@gmail.com', '$2a$10$nmlblXWGvaTjlLzPYxfAuuQMyG.LQIK1b.tPEtW.GBpq5MUrdPH1G', TRUE),
+           ('User',  'user@gmail.com',  '$2a$10$Oj5RqyqRfYRK.sEY4WY6Ue7yntCeGna2asa.N87hEkcNnlwCSRi3a', TRUE);
 
 INSERT INTO user_roles (role, user_id)
-    VALUES ('USER', 101),
-           ('ADMIN', 100);
+    VALUES ('ROLE_USER', 101),
+           ('ROLE_ADMIN', 100);
 
 INSERT INTO lunches (name, price, restaurant_id, datetime)
-      VALUES ('Breakfast1', 15.25, 100, '2016-12-23 10:00:00'),
-             ('Breakfast2', 18.35, 101, '2016-12-23 11:00:00'),
-             ('Dinner1', 9.25, 102, '2016-12-23 12:30:00'),
-             ('Dinner2', 10.00, 103, '2016-12-23 13:00:00');
+      VALUES ('Breakfast1', 15.25, 100, '2017-04-22 10:00:00'),
+             ('Breakfast2', 18.35, 101, '2017-04-22 11:00:00'),
+             ('Dinner1', 9.25, 102, '2017-04-22 12:30:00'),
+             ('Dinner2', 10.00, 103, '2017-04-22 13:00:00');
 
 INSERT INTO dishes (name, price, restaurant_id)
       VALUES  ('Eggs', 15.25, 100),

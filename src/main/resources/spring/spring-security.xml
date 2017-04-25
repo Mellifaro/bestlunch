@@ -19,6 +19,7 @@
     <http>
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/register" access="permitAll"/>
+        <intercept-url pattern="/ajax/restaurants/" access="permitAll"/>
 
         <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -26,12 +27,27 @@
         <form-login login-page="/login" default-target-url="/restaurants"
                     authentication-failure-url="/login?error=true"
                     login-processing-url="/spring_security_check"/>
+
         <logout logout-success-url="/login"/>
+        <csrf disabled="true"/>
     </http>
+
+    <beans:bean class="ua.bestlunch.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
 
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder"/>
 
+
+            <!--<user-service id="myUService">-->
+                <!--<user name="admin@gmail.com" encodedPassword="admin" authorities="ROLE_USER, ROLE_ADMIN"/>-->
+                <!--<user name="user" encodedPassword="user" authorities="ROLE_USER"/>-->
+            <!--</user-service>-->
+
+            <!--<jdbc-user-service data-source-ref="dataSource"-->
+                               <!--users-by-username-query="SELECT email, encodedPassword, enabled FROM users WHERE email=?"-->
+                               <!--authorities-by-username-query="SELECT u.email, r.role FROM users u, user_roles r WHERE u.id = r.user_id AND u.email = ?"-->
+            <!--/>-->
         </authentication-provider>
     </authentication-manager>
 

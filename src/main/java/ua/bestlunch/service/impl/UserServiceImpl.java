@@ -1,5 +1,7 @@
 package ua.bestlunch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.bestlunch.AuthorizedUser;
 import ua.bestlunch.model.User;
+import ua.bestlunch.model.to.UserTo;
 import ua.bestlunch.repository.UserRepository;
 import ua.bestlunch.service.UserService;
 import ua.bestlunch.util.exception.ExceptionUtil;
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     @CacheEvict(value = "users", allEntries = true)
@@ -48,6 +53,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
         repository.save(user);
+    }
+
+    @Override
+    @CacheEvict(value = "users", allEntries = true)
+    public void update(UserTo userTo) {
+        User user = repository.get(userTo.getId());
+        user.setName(userTo.getName());
+        user.setEmail(user.getEmail());
+        user.setPassword(userTo.getPassword());
+        update(user);
     }
 
     @Override

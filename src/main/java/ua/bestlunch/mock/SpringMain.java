@@ -14,13 +14,13 @@ import java.sql.Connection;
 public class SpringMain {
 
     public static void main(String[] args) {
-//        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml");
-//        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
-//        for(String bean : beanDefinitionNames){
-//            System.out.println("-----" + bean);
-//        }
-//
-//        System.out.println("******************************************");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml");
+        String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+        for(String bean : beanDefinitionNames){
+            System.out.println("-----" + bean);
+        }
+
+        System.out.println("******************************************");
 
 
     }

@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Created by Виктор on 12.11.2016.
  */
+
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private final static long serialVersionUID = 1L;
 

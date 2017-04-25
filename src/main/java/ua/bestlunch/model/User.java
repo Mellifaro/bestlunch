@@ -47,11 +47,11 @@ public class User extends NamedEntity{
     @Length(min = 5)
     private String password;
 
-    @Column(name = "registered", columnDefinition = "timestamp default now()")
+    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     private Date registered = new Date();
 
-    @Column(name = "enabled")
-    private boolean enabled;
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))

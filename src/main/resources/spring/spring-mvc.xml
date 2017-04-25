@@ -39,6 +39,8 @@
 
     <!--It is necessary to register interceptor in mvc context    -->
     <mvc:interceptors>
+        <bean class="ua.bestlunch.web.interceptors.ModelInterceptor"/>
+
         <bean id="localeChangeInterceptor"
               class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
               <property name="paramName" value="language" />

@@ -1,1 +1,1 @@
-var ajaxUrl = 'bestlunch/ajax/restaurants/';
+var ajaxUrl = 'ajax/restaurants/';

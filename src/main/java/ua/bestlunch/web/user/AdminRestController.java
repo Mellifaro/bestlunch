@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ua.bestlunch.AuthorizedUser;
 import ua.bestlunch.model.User;
 import ua.bestlunch.service.UserService;
 
@@ -26,6 +27,7 @@ public class AdminRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll(){
+        AuthorizedUser.safeGet();
         return service.getAll();
     }
 

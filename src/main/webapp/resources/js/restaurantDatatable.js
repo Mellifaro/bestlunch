@@ -1,9 +1,9 @@
-var ajaxUrl = 'bestlunch/ajax/restaurants/';
+var ajaxUrl = 'ajax/restaurants/';
 var datatableApi;
 
 var currentVote;
-var ajaxCurrentVoteURL = 'bestlunch/ajax/votes/currentVote/';
-var ajaxVoteURL = 'bestlunch/ajax/votes/';
+var ajaxCurrentVoteURL = 'ajax/votes/currentVote/';
+var ajaxVoteURL = 'ajax/votes/';
 var limitHour = 11;
 
 $(function () {

@@ -87,7 +87,7 @@ public class JdbcVoteRepositoryImpl implements VoteRepository{
     public int getVotesForRestaurant(int restaurantId) {
         LocalDate before = LocalDate.now();
         LocalDate after = before.plusDays(1);
-        List<Vote> votes = jdbcTemplate.query("SELECT FROM votes WHERE user_id=? AND vote_time BETWEEN ? and ?",
+        List<Vote> votes = jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? AND vote_time BETWEEN ? and ?",
                                 ROW_MAPPER, restaurantId, before.atStartOfDay(), after.atStartOfDay());
         return votes.size();
     }
@@ -96,7 +96,7 @@ public class JdbcVoteRepositoryImpl implements VoteRepository{
     public Vote getCurrentVote(User user) {
         LocalDate before = LocalDate.now();
         LocalDate after = before.plusDays(1);
-        List<Vote> votes = jdbcTemplate.query("SELECT FROM votes WHERE user_id=? AND vote_time BETWEEN ? and ?",
+        List<Vote> votes = jdbcTemplate.query("SELECT * FROM votes WHERE user_id=? AND vote_time BETWEEN ? and ?",
                                                 ROW_MAPPER, user.getId(), before.atStartOfDay(), after.atStartOfDay());
         return DataAccessUtils.singleResult(votes);
     }
