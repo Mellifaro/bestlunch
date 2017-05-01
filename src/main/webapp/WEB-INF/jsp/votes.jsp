@@ -8,11 +8,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
-<head>
     <jsp:include page="fragments/headTag.jsp"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
-</head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
@@ -30,8 +27,8 @@
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Restaurant</th>
-                        <th>Datetime</th>
+                        <th><spring:message code="restaurant"/></th>
+                        <th><spring:message code="table.datetime"/></th>
                     </tr>
                     </thead>
                 </table>
@@ -51,6 +48,5 @@
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript" src="resources/js/lunchDatatable.js"></script>
-<script type="text/javascript" src="resources/js/navbaar.js"></script>
+<script type="text/javascript" src="resources/js/voteDatatable.js"></script>
 </html>

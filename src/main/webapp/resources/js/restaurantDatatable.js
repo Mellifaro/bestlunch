@@ -8,7 +8,7 @@ var limitHour = 11;
 
 $(function () {
     receiveCurrentVote();
-
+    var languageRef = getLanguageRef();
     datatableApi = $('#datatable').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -16,6 +16,9 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": languageRef
+        },
         "columns": [
             {
                 "data": "name"
@@ -77,7 +80,7 @@ $(function () {
                 "orderable": false,
                 "defaultContent": "",
                 "render": function (data, type, row) {
-                    return renderEditBtn(type, row, 'users.edit');
+                    return renderEditBtn(type, row, getTextByLocale("Edit кestaurant", "Редактировать ресторан", "Редактувати ресторан"));
                 }
             },
             {
@@ -125,14 +128,16 @@ function renderMainCancelButton() {
 
 function renderVoteBtn(type, row, key){
     var now = new Date();
+    var cancelText = getTextByLocale("Cancel", "Отмена", "Відміна");
+    var voteText = getTextByLocale("Vote", "Голос", "Голос");
     if(currentVote != null && currentVote.restaurant.id == row.id && now.getHours() < limitHour){
-        return '<a class="btn btn-xs btn-danger" onclick="cancelVote()">Cancel</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="cancelVote()">' + cancelText + '</a>';
     }else if(currentVote != null && currentVote.restaurant.id == row.id && now.getHours() > limitHour){
-        return '<a class="btn btn-xs btn-danger disabled">Cancel</a>';
+        return '<a class="btn btn-xs btn-danger disabled">' + cancelText + '</a>';
     }else if(currentVote != null && currentVote.restaurant.id != row.id){
-        return '<a class="btn btn-xs btn-primary disabled">Vote</a>';
+        return '<a class="btn btn-xs btn-primary disabled">' + voteText + '</a>';
     }else{
-        return '<a class="btn btn-xs btn-primary" onclick="vote(' +row.id + ')">Vote</a>'
+        return '<a class="btn btn-xs btn-primary" onclick="vote(' +row.id + ')">' + voteText + '</a>'
     }
 }
 

@@ -2,7 +2,7 @@ var ajaxUrl = 'ajax/restaurants/';
 var datatableApi;
 
 $(function () {
-
+    var languageRef = getLanguageRef();
     datatableApi = $('#datatable').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -10,6 +10,9 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": languageRef
+        },
         "columns": [
             {
                 "data": "name"

@@ -2,6 +2,7 @@ var ajaxUrl = window.location.href.replace('bestlunch', 'bestlunch/ajax');
 var datatableApi;
 
 $(function () {
+    var languageRef = getLanguageRef();
     datatableApi = $('#datatable').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -9,51 +10,19 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": languageRef
+        },
         "columns": [
             {
-                "data": "name"
-            },
+                "data": "restaurant.name"
+            },            
             {
-                "data": "price",
-                "render": function(data, type, row){
-                    return data == null ? "" : data;
-                }
-            },
-            {
-                "data": "dateTime",
+                "data": "time",
                 "render": function (data, type, row) {
                     return data.replace('T', ' ').substr(0, 16);
                 }
-            },
-            {
-                "data": "dishes",
-                "render": function ( data, type, full ) {
-                    return $.map( data, function ( d, i ) {
-                        return ++i + '. ' + d.name;
-                    } ).join( '<br>' );
-                }
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "render": function (data, type, row) {
-                    return renderDishesBtn(type, row, 'users.edit');
-                }
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "render": function (data, type, row) {
-                    return renderEditBtn(type, row, 'users.edit');
-                }
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "render": function (data, type, row) {
-                    return renderDeleteBtn(data, type, row);
-                }
-            }
+            }           
 
         ],
         "order": [

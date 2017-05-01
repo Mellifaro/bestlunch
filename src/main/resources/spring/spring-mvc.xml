@@ -32,18 +32,16 @@
           p:suffix=".jsp"/>
 
     <!--Spring internaliozation-->
-    <bean id="localeResolver"
-          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-          <property name="defaultLocale" value="en"/>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+          <!--<property name="defaultLocale" value="en"/>-->
     </bean>
 
     <!--It is necessary to register interceptor in mvc context    -->
     <mvc:interceptors>
         <bean class="ua.bestlunch.web.interceptors.ModelInterceptor"/>
 
-        <bean id="localeChangeInterceptor"
-              class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-              <property name="paramName" value="language" />
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+              <property name="paramName" value="lang"/>
         </bean>
     </mvc:interceptors>
 
@@ -56,10 +54,11 @@
     <!--</bean>-->
 
     <!-- Register the messages.properties -->
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-          <property name="basename" value="messages"/>
-          <property name="defaultEncoding" value="UTF-8"/>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames" value="file:///#{systemEnvironment['BESTLUNCH_ROOT']}/config/messages/app"/>
+        <property name="fallbackToSystemLocale" value="false"/>
     </bean>
 
 </beans>

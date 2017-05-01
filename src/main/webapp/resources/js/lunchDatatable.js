@@ -44,7 +44,7 @@ $(function () {
                 "orderable": false,
                 "defaultContent": "",
                 "render": function (data, type, row) {
-                    return renderEditBtn(type, row, 'users.edit');
+                    return renderEditBtn(type, row, getTextByLocale("Edit lunch", "Редактировать ланч", "Редактувати ланч"));
                 }
             },
             {
@@ -64,5 +64,8 @@ $(function () {
         ],
         "initComplete": makeEditable
     });
+
+    var dateTimeLunch = $('#dateTime');
+    dateTimeLunch.datetimepicker();
 });
 

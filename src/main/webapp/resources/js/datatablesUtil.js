@@ -54,6 +54,7 @@ function save(){
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
+            successNoty('Saved');
         }
     });
 }
@@ -107,26 +108,30 @@ function add(key){
 }
 
 function renderEditBtn(type, row, key){
+    var editText = getTextByLocale("Edit", "Редактир", "Редактув");
     if(type == 'display'){
-        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ',\'' + key + '\');">Edit</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ',\'' + key + '\');">' + editText + '</a>';
     }
 }
 
 function renderDeleteBtn(data, type, row){
+    var deleteText = getTextByLocale("Delete", "Удалить", "Видалити");
     if(type == 'display'){
-        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' +row.id + ')">Delete</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' +row.id + ')">' + deleteText + '</a>';
     }
 }
 
 function renderLunchesBtn(type, row, key){
+    var lunchesText = getTextByLocale("Lunches", "Ланчи", "Ланчі");
     if(type == 'display'){
-        return '<a class="btn btn-xs btn-primary" onclick="moveToLunches(' +row.id + ')">Lunches</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="moveToLunches(' +row.id + ')">' + lunchesText + '</a>';
     }
 }
 
 function renderDishesBtn(type, row, key){
+    var dishesText = getTextByLocale("Dishes", "Блюда", "Страви");
     if(type == 'display'){
-        return '<a class="btn btn-xs btn-primary" onclick="moveToDishes(' +row.id + ')">Dishes</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="moveToDishes(' +row.id + ')">' + dishesText + '</a>';
     }
 }
 
@@ -136,4 +141,34 @@ function moveToLunches(id) {
 
 function moveToDishes(id) {
     window.location.href = window.location.href + id + '/dishes/';
+}
+
+function getLanguageRef(){
+    var locale = getLocaleCookie();
+    switch (locale){
+        case "ru": return "//cdn.datatables.net/plug-ins/1.10.15/i18n/Russian.json";
+        case "ua": return "//cdn.datatables.net/plug-ins/1.10.15/i18n/Ukrainian.json";
+    }
+    return "//cdn.datatables.net/plug-ins/1.10.15/i18n/English.json";    
+}
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+    return "en";
+}
+
+function getLocaleCookie(){
+    return getCookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE");
+}
+
+function getTextByLocale(enText, ruText, uaText){
+    var locale = getLocaleCookie();
+    switch (locale){
+        case "ru": return ruText;
+        case "ua": return uaText;
+    }
+    return enText;
+
 }

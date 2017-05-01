@@ -8,11 +8,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
-<head>
     <jsp:include page="fragments/headTag.jsp"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
-</head>
+    <link rel="stylesheet" href="webjars/datetimepicker/2.4.7/jquery.datetimepicker.css">
+    <style>
+        .datepicker{z-index:1151 !important;}
+    </style>
+
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
@@ -24,25 +26,58 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>${restaurant.name}</h3>
-            <h3>Lunches list</h3>
+            <h3><spring:message code="restaurant"/> "${restaurant.name}": <spring:message code="lunches.list"/></h3>
 
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="add('lunches.add')" >Add lunch</a>
+                <a class="btn btn-sm btn-info" onclick="add('<spring:message code="lunch.add"/>')" ><spring:message code="lunch.add"/></a>
 
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Datetime</th>
-                        <th>Dishes</th>
-                        <th>All dishes</th>
+                        <th><spring:message code="table.name"/></th>
+                        <th><spring:message code="table.price"/></th>
+                        <th><spring:message code="table.datetime"/></th>
+                        <th><spring:message code="table.dishes"/></th>
+                        <th><spring:message code="table.alldishes"/></th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                 </table>
+
+                <%--<form:form class="form-horizontal" method="post" id="detailsForm1">--%>
+                    <%--<input type="text" hidden="hidden" id="id" name="id">--%>
+
+                    <%--<div class="form-group">--%>
+                        <%--<label for="name1" class="control-label col-xs-3"><spring:message code="name"/></label>--%>
+
+                        <%--<div class="col-xs-9">--%>
+                            <%--<input type="text" class="form-control" id="name1" name="name" placeholder="Name">--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+
+                    <%--<div class="form-group">--%>
+                        <%--<label for="address1" class="control-label col-xs-3"><spring:message code="table.price"/></label>--%>
+
+                        <%--<div class="col-xs-9">--%>
+                            <%--<input type="text" class="form-control" id="address1" name="address" placeholder="Address">--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+
+                    <%--<div class="form-group">--%>
+                        <%--<label for="dateTimeLunch1" class="control-label col-xs-3"><spring:message code="table.datetime"/></label>--%>
+
+                        <%--<div class="col-xs-9">--%>
+                            <%--<input class="form-control datepicker" id="dateTimeLunch1" name="dateTime">--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-xs-offset-3 col-xs-9">--%>
+                            <%--<button type="submit" class="btn btn-primary"><spring:message code="save"/></button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</form:form>--%>
 
             </div>
         </div>
@@ -63,7 +98,7 @@
                     <input type="text" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Name</label>
+                        <label for="name" class="control-label col-xs-3"><spring:message code="name"/></label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name">
@@ -71,24 +106,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="address" class="control-label col-xs-3">Adress</label>
+                        <label for="price" class="control-label col-xs-3"><spring:message code="table.price"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                            <input type="text" class="form-control" id="price" name="price" placeholder="Price">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="control-label col-xs-3">Telephone</label>
+                        <label for="dateTime" class="control-label col-xs-3"><spring:message code="table.datetime"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telephone">
+                            <input class="form-control datepicker" id="dateTime" name="dateTime">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary"><spring:message code="save"/></button>
                         </div>
                     </div>
                 </form:form>
@@ -107,5 +142,4 @@
 <script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/js/lunchDatatable.js"></script>
-<script type="text/javascript" src="resources/js/navbaar.js"></script>
 </html>

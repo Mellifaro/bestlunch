@@ -118,7 +118,7 @@ public class RootController {
         return "dishes";
     }
 
-    @RequestMapping(value = "/profile/votes", method = RequestMethod.GET)
+    @RequestMapping(value = "/votes", method = RequestMethod.GET)
     public String votes(){
         return "votes";
     }

@@ -16,43 +16,51 @@ import java.util.List;
  * Created by Виктор on 25.12.2016.
  */
 @RestController
-@RequestMapping(value = "/ajax/restaurants/{rest_id}/dishes")
+@RequestMapping(value = "/ajax/restaurants/{rest_id}")
 public class DishAjaxController {
 
     @Autowired
     private DishService service;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Dish get(@PathVariable("id") int id){
-        return service.get(id);
-    }
-
-    @RequestMapping(value = "/lunches/{lunch_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dish> getAllByLunch(@PathVariable("lunch_id") int lunch_id){
-        return service.getAllByLunch(lunch_id);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/dishes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAllByRestaurant(@PathVariable("rest_id") int rest_id){
         return service.getAllByRestaurant(rest_id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish){
-        Dish created = service.save(dish);
-
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/restaurants/{rest_id}/dishes/{id}")
-                .buildAndExpand(created.getId()).toUri();
-        return ResponseEntity.created(uriOfNewResource).body(created);
+    @RequestMapping(value = "/dishes/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dish getById(@PathVariable("id") int id){
+        return service.get(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/lunches/{lunch_id}/dishes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Dish> getAllByLunch(@PathVariable("lunch_id") int lunch_id){
+        return service.getAllByLunch(lunch_id);
+    }
+
+    @RequestMapping(value = "/lunches/{lunch_id}/dishes/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Dish getByIdFromlunches(@PathVariable("id") int id){
+        return service.get(id);
+    }
+
+    @RequestMapping(value = "/dishes", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid Dish dish){
-        service.update(dish);
+        if(dish.isNew()){
+            service.save(dish);
+        }else{
+            service.update(dish);
+        }
     }
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/lunches/{lunch_id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateFromLunches(@Valid Dish dish){
+        if(dish.isNew()){
+            service.save(dish);
+        }else{
+            service.update(dish);
+        }
+    }
+
+    @RequestMapping(value = "/dishes/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id){
         service.delete(id);
     }

@@ -14,7 +14,14 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h2>${register ? 'Register new' : userTo.name.concat(' profile')}</h2>
+            <c:choose>
+                <c:when test="${register}">
+                    <h3><spring:message code="register.new"/></h3>
+                </c:when>
+                <c:otherwise>
+                    <h3>${userTo.name.concat(' profile')}</h3>
+                </c:otherwise>
+            </c:choose>
 
             <div class="view-box">
                 <form:form modelAttribute="userTo" class="form-horizontal" method="post"
@@ -25,11 +32,23 @@
                     <bestlunch:inputField label="Email" name="email"/>
                     <bestlunch:inputField label="Password" name="password" inputType="password"/>
 
-                    <div class="form-group">
-                        <div class="col-xs-offset-2 col-xs-10">
-                            <button type="submit" class="btn btn-primary">${register ? 'Add' : 'Update'}</button>
-                        </div>
-                    </div>
+                    <c:choose>
+                        <c:when test="${register}">
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" class="btn btn-primary"><spring:message code="register"/></button>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" class="btn btn-primary"><spring:message code="update"/></button>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+
                 </form:form>
             </div>
         </div>

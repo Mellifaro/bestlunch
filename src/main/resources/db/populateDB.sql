@@ -28,10 +28,10 @@ INSERT INTO user_roles (role, user_id)
            ('ROLE_ADMIN', 100);
 
 INSERT INTO lunches (name, price, restaurant_id, datetime)
-      VALUES ('Breakfast1', 15.25, 100, '2017-04-22 10:00:00'),
-             ('Breakfast2', 18.35, 101, '2017-04-22 11:00:00'),
-             ('Dinner1', 9.25, 102, '2017-04-22 12:30:00'),
-             ('Dinner2', 10.00, 103, '2017-04-22 13:00:00');
+      VALUES ('Breakfast1', 15.25, 100, '2017-05-01 10:00:00'),
+             ('Breakfast2', 18.35, 101, '2017-05-01 11:00:00'),
+             ('Dinner1', 9.25, 102, '2017-05-01 12:30:00'),
+             ('Dinner2', 10.00, 103, '2017-05-01 13:00:00');
 
 INSERT INTO dishes (name, price, restaurant_id)
       VALUES  ('Eggs', 15.25, 100),
@@ -56,5 +56,10 @@ INSERT INTO lunch_dish (lunch_id, dish_id)
 INSERT INTO votes (user_id, restaurant_id)
       VALUES  (100, 101),
               (101, 103);
+
+INSERT INTO votes (user_id, restaurant_id, vote_time)
+      VALUES  (100, 101, '2017-04-23 11:42:00'),
+              (100, 102, '2017-05-01 10:35:00'),
+              (101, 103, '2017-05-01 10:00:00');
 
 

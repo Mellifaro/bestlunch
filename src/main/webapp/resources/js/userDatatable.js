@@ -2,6 +2,7 @@ var ajaxUrl = 'ajax/admin/users/';
 var datatableApi;
 
 $(function () {
+    var languageRef = getLanguageRef();
     datatableApi = $('#datatable').DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -9,6 +10,9 @@ $(function () {
         },
         "paging": true,
         "info": true,
+        "language": {
+            "url": languageRef
+        },
         "columns": [
             {
                 "data": "name"
@@ -47,7 +51,7 @@ $(function () {
                 "orderable": false,
                 "defaultContent": "",
                 "render": function (data, type, row) {
-                    return renderEditBtn(type, row, 'users.edit');
+                    return renderEditBtn(type, row, getTextByLocale("Edit user", "Редактировать пользователя", "Редактувати користувача"));
                 }
             },
             {

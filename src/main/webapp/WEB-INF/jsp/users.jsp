@@ -8,11 +8,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
-<head>
     <jsp:include page="fragments/headTag.jsp"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
-</head>
 <body>
     <jsp:include page="fragments/bodyHeader.jsp"/>
 
@@ -24,20 +21,20 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>Userlist</h3>
+            <h3><spring:message code="userlist"/></h3>
 
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="add('users.add')" >Add user</a>
+                <a class="btn btn-sm btn-info" onclick="add('<spring:message code="users.add"/>')" ><spring:message code="users.add"/></a>
 
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Roles</th>
-                        <th>Password</th>
-                        <th>Enabled</th>
-                        <th>Registered</th>
+                        <th><spring:message code="table.name"/></th>
+                        <th><spring:message code="email"/></th>
+                        <th><spring:message code="table.roles"/></th>
+                        <th><spring:message code="password"/></th>
+                        <th><spring:message code="table.enabled"/></th>
+                        <th><spring:message code="table.registered"/></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -63,7 +60,7 @@
                     <input type="text" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Name</label>
+                        <label for="name" class="control-label col-xs-3"><spring:message code="name"/></label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name">
@@ -71,7 +68,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email</label>
+                        <label for="email" class="control-label col-xs-3"><spring:message code="email"/></label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="email" name="email" placeholder="Email">
@@ -79,7 +76,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="control-label col-xs-3">Password</label>
+                        <label for="password" class="control-label col-xs-3"><spring:message code="password"/></label>
 
                         <div class="col-xs-9">
                             <input type="password" class="form-control" id="password" name="password" placeholder="Email">
@@ -88,7 +85,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary"><spring:message code="save"/></button>
                         </div>
                     </div>
                 </form:form>
@@ -107,5 +104,4 @@
     <script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
     <script type="text/javascript" src="resources/js/userDatatable.js"></script>
-    <script type="text/javascript" src="resources/js/navbaar.js"></script>
 </html>

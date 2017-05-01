@@ -3,10 +3,13 @@ package ua.bestlunch.model.to;
 import ua.bestlunch.model.Lunch;
 import ua.bestlunch.model.Restaurant;
 
+import java.io.Serializable;
+
 /**
  * Created by Виктор on 23.08.2016.
  */
-public class RestaurantWithLunch {
+public class RestaurantWithLunch implements Serializable {
+    private static final long serialVersionUID = -1414551519149331638L;
 
     private int id;
     private String name;

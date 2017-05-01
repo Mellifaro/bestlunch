@@ -5,11 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-<head>
     <jsp:include page="fragments/headTag.jsp"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="webjars/datatables/1.10.12/css/jquery.dataTables.min.css">
-</head>
+
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <%--<div class="navbar navbar-fixed-top" role="navigation">--%>
@@ -59,19 +57,19 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h3>Restaurant list</h3>
+            <h3><spring:message code="restaurant.list"/></h3>
 
             <div class="view-box">
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Telephone</th>
-                        <th>Lunch</th>
-                        <th>Dishes</th>
-                        <th>Price</th>
-                        <th>Votes</th>
+                        <th><spring:message code="table.name"/></th>
+                        <th><spring:message code="table.address"/></th>
+                        <th><spring:message code="table.telephone"/></th>
+                        <th><spring:message code="table.lunch"/></th>
+                        <th><spring:message code="table.dishes"/></th>
+                        <th><spring:message code="table.price"/></th>
+                        <th><spring:message code="table.votes"/></th>
                     </tr>
                     </thead>
                 </table>
@@ -91,5 +89,5 @@
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="webjars/datetimepicker/2.4.7/build/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="resources/js/loginDatatable.js"></script>
-<script type="text/javascript" src="resources/js/navbaar.js"></script>
+<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
 </html>

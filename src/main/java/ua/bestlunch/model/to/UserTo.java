@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by Виктор on 12.11.2016.
  */
 public class UserTo implements Serializable{
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4360395719334854365L;
 
     private Integer id;
 
